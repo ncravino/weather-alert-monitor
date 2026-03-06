@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Active Weather Alerts</title>
+  <link rel="stylesheet" href="alerts.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="header-left">
+        <img src="icons/weather-alert-icon64x64.png" alt="" class="header-icon" />
+        <div>
+          <h1>Active Weather Alerts</h1>
+          <p class="subheading" id="subheading">Loading...</p>
+        </div>
+      </div>
+      <button class="btn-refresh" id="btnRefresh">&#8635; Refresh</button>
+    </header>
+
+    <main id="alertList">
+      <div class="loading">Loading alerts...</div>
+    </main>
+  </div>
+
+  <script src="alerts.js"></script>
+</body>
+</html>

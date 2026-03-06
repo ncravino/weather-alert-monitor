@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "Europe Weather Alert Monitor",
+  "version": "1.0.0",
+  "description": "Monitors Weather Alerts for any of the 33 European Countries part of EUMETNET MeteoAlarm.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "weather-alert-monitor@extension",
+      "strict_min_version": "91.0"
+    }
+  },
+  "permissions": [
+    "alarms",
+    "notifications",
+    "storage",
+    "geolocation",
+    "https://feeds.meteoalarm.org/*",
+    "https://nominatim.openstreetmap.org/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/weather-alert-icon16x16.png",
+      "32": "icons/weather-alert-icon32x32.png",
+      "48": "icons/weather-alert-icon48x48.png",
+      "64": "icons/weather-alert-icon64x64.png",
+      "128": "icons/weather-alert-icon128x128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/weather-alert-icon16x16.png",
+    "32": "icons/weather-alert-icon32x32.png",
+    "48": "icons/weather-alert-icon48x48.png",
+    "64": "icons/weather-alert-icon64x64.png",
+    "128": "icons/weather-alert-icon128x128.png"
+  }
+}

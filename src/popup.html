@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Alert Monitor</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="icons/weather-alert-icon128x128.png" alt="Weather" class="header-icon" />
+      <h1>Weather Alerts</h1>
+      <span class="powered-by">MeteoAlarm</span>
+    </header>
+
+    <!-- Status bar -->
+    <section class="status-bar">
+      <span id="statusText">Loading...</span>
+    </section>
+
+    <!-- Active alerts summary (clickable) -->
+    <button class="alert-summary" id="alertSummary" style="display:none">
+      <span class="alert-badge" id="alertBadge"></span>
+      <span id="alertSummaryText"></span>
+      <span class="alert-summary-cta">View all ›</span>
+    </button>
+
+    <!-- Country selector -->
+    <section class="location-section">
+      <div class="field-row">
+        <label for="selectCountry">Country</label>
+        <div class="select-row">
+          <select id="selectCountry">
+            <option value="">— Select a country —</option>
+            <option value="austria">Austria</option>
+            <option value="belgium">Belgium</option>
+            <option value="bosnia-herzegovina">Bosnia Herzegovina</option>
+            <option value="bulgaria">Bulgaria</option>
+            <option value="croatia">Croatia</option>
+            <option value="cyprus">Cyprus</option>
+            <option value="czech-republic">Czech Republic</option>
+            <option value="denmark">Denmark</option>
+            <option value="estonia">Estonia</option>
+            <option value="finland">Finland</option>
+            <option value="france">France</option>
+            <option value="germany">Germany</option>
+            <option value="greece">Greece</option>
+            <option value="hungary">Hungary</option>
+            <option value="iceland">Iceland</option>
+            <option value="ireland">Ireland</option>
+            <option value="israel">Israel</option>
+            <option value="italy">Italy</option>
+            <option value="kosovo">Kosovo</option>
+            <option value="latvia">Latvia</option>
+            <option value="lithuania">Lithuania</option>
+            <option value="luxembourg">Luxembourg</option>
+            <option value="malta">Malta</option>
+            <option value="moldova">Moldova</option>
+            <option value="montenegro">Montenegro</option>
+            <option value="netherlands">Netherlands</option>
+            <option value="north-macedonia">North Macedonia</option>
+            <option value="norway">Norway</option>
+            <option value="poland">Poland</option>
+            <option value="portugal">Portugal</option>
+            <option value="romania">Romania</option>
+            <option value="serbia">Serbia</option>
+            <option value="slovakia">Slovakia</option>
+            <option value="slovenia">Slovenia</option>
+            <option value="spain">Spain</option>
+            <option value="sweden">Sweden</option>
+            <option value="switzerland">Switzerland</option>
+            <option value="turkey">Turkey</option>
+            <option value="united-kingdom">United Kingdom</option>
+          </select>
+          <button class="btn-detect" id="btnDetect" title="Auto-detect country from your location">&#x25CE; Detect</button>
+        </div>
+        <span class="geo-result" id="geoResult" style="display:none" id="geoCoords"></span>
+      </div>
+
+      <div class="field-row">
+        <label for="inputCityFilter">City / District <span class="optional">optional</span></label>
+        <input type="text" id="inputCityFilter" placeholder="e.g. Berlin, Île-de-France" autocomplete="off" />
+        <span class="hint">Only show alerts whose area matches this text.</span>
+      </div>
+
+      <button class="btn-save" id="btnSave">Save &amp; Check Now</button>
+      <p class="error-msg" id="saveError" style="display:none"></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <span id="lastCheckText">Never checked</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
