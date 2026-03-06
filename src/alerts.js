@@ -32,17 +32,21 @@ function renderSubheading() {
   const lastCheckStr = cachedLastCheck ? new Date(cachedLastCheck).toLocaleString() : 'Never';
   const sub = document.getElementById('subheading');
 
-  if (cachedCityFilter) {
-    const filterText = escHtml(cachedCityFilter);
-    const toggleBtn = filterEnabled
-      ? `<button class="btn-filter-toggle active" id="btnToggleFilter">Filtered: ${filterText} ×</button>`
-      : `<button class="btn-filter-toggle" id="btnToggleFilter">+ ${filterText}</button>`;
+  sub.textContent = '';
 
-    sub.innerHTML = `${escHtml(countryLabel)} · ${toggleBtn} · Last checked: ${lastCheckStr}`;
-    document.getElementById('btnToggleFilter').addEventListener('click', () => {
+  if (cachedCityFilter) {
+    sub.appendChild(document.createTextNode(`${countryLabel} · `));
+
+    const btn = document.createElement('button');
+    btn.className = filterEnabled ? 'btn-filter-toggle active' : 'btn-filter-toggle';
+    btn.textContent = filterEnabled ? `Filtered: ${cachedCityFilter} ×` : `+ ${cachedCityFilter}`;
+    btn.addEventListener('click', () => {
       filterEnabled = !filterEnabled;
       renderPage();
     });
+    sub.appendChild(btn);
+
+    sub.appendChild(document.createTextNode(` · Last checked: ${lastCheckStr}`));
   } else {
     sub.textContent = `${countryLabel} · Last checked: ${lastCheckStr}`;
   }
@@ -50,19 +54,37 @@ function renderSubheading() {
 
 function renderList(alerts) {
   const list = document.getElementById('alertList');
+  list.textContent = '';
+
   if (alerts.length === 0) {
-    list.innerHTML = filterEnabled && cachedCityFilter
-      ? `<div class="empty">No active alerts match <strong>${escHtml(cachedCityFilter)}</strong>. <button class="btn-link" id="btnShowAll">Show all alerts</button></div>`
-      : '<div class="empty">No active weather alerts for your area.</div>';
+    const empty = document.createElement('div');
+    empty.className = 'empty';
+
     if (filterEnabled && cachedCityFilter) {
-      document.getElementById('btnShowAll').addEventListener('click', () => {
+      empty.appendChild(document.createTextNode('No active alerts match '));
+      const strong = document.createElement('strong');
+      strong.textContent = cachedCityFilter;
+      empty.appendChild(strong);
+      empty.appendChild(document.createTextNode('. '));
+      const btn = document.createElement('button');
+      btn.className = 'btn-link';
+      btn.textContent = 'Show all alerts';
+      btn.addEventListener('click', () => {
         filterEnabled = false;
         renderPage();
       });
+      empty.appendChild(btn);
+    } else {
+      empty.textContent = 'No active weather alerts for your area.';
     }
+
+    list.appendChild(empty);
     return;
   }
-  list.innerHTML = alerts.map(alertCard).join('');
+
+  const fragment = document.createDocumentFragment();
+  alerts.forEach((alert) => fragment.appendChild(alertCard(alert)));
+  list.appendChild(fragment);
 }
 
 function alertCard(alert) {
@@ -70,36 +92,59 @@ function alertCard(alert) {
   const severityClass = ['extreme', 'severe', 'moderate', 'minor'].includes(severity)
     ? severity : 'unknown';
 
-  const event     = escHtml(alert.event || alert.title || 'Weather Alert');
-  const area      = escHtml(alert.areaDesc || '');
-  const summary   = escHtml(alert.summary || '');
-  const urgency   = escHtml(alert.urgency || '');
-  const certainty = escHtml(alert.certainty || '');
-  const updated   = alert.updated ? new Date(alert.updated).toLocaleString() : '';
+  const card = document.createElement('div');
+  card.className = `alert-card severity-${severityClass}`;
 
-  return `
-    <div class="alert-card severity-${severityClass}">
-      <div class="card-header">
-        <span class="card-event">${event}</span>
-        <span class="severity-badge ${severityClass}">${escHtml(alert.severity || 'Unknown')}</span>
-      </div>
-      ${area    ? `<div class="card-area">${area}</div>` : ''}
-      <div class="card-meta">
-        ${urgency   ? `<span data-label="Urgency">${urgency}</span>`    : ''}
-        ${certainty ? `<span data-label="Certainty">${certainty}</span>` : ''}
-      </div>
-      ${summary ? `<div class="card-summary">${summary}</div>` : ''}
-      ${updated ? `<div class="card-footer">Updated: ${updated}</div>` : ''}
-    </div>
-  `;
-}
+  const header = document.createElement('div');
+  header.className = 'card-header';
+  const eventSpan = document.createElement('span');
+  eventSpan.className = 'card-event';
+  eventSpan.textContent = alert.event || alert.title || 'Weather Alert';
+  const badge = document.createElement('span');
+  badge.className = `severity-badge ${severityClass}`;
+  badge.textContent = alert.severity || 'Unknown';
+  header.appendChild(eventSpan);
+  header.appendChild(badge);
+  card.appendChild(header);
 
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  if (alert.areaDesc) {
+    const area = document.createElement('div');
+    area.className = 'card-area';
+    area.textContent = alert.areaDesc;
+    card.appendChild(area);
+  }
+
+  const meta = document.createElement('div');
+  meta.className = 'card-meta';
+  if (alert.urgency) {
+    const span = document.createElement('span');
+    span.dataset.label = 'Urgency';
+    span.textContent = alert.urgency;
+    meta.appendChild(span);
+  }
+  if (alert.certainty) {
+    const span = document.createElement('span');
+    span.dataset.label = 'Certainty';
+    span.textContent = alert.certainty;
+    meta.appendChild(span);
+  }
+  card.appendChild(meta);
+
+  if (alert.summary) {
+    const summary = document.createElement('div');
+    summary.className = 'card-summary';
+    summary.textContent = alert.summary;
+    card.appendChild(summary);
+  }
+
+  if (alert.updated) {
+    const footer = document.createElement('div');
+    footer.className = 'card-footer';
+    footer.textContent = `Updated: ${new Date(alert.updated).toLocaleString()}`;
+    card.appendChild(footer);
+  }
+
+  return card;
 }
 
 document.getElementById('btnRefresh').addEventListener('click', () => {

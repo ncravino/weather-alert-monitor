@@ -37,5 +37,12 @@
     "48": "icons/weather-alert-icon48x48.png",
     "64": "icons/weather-alert-icon64x64.png",
     "128": "icons/weather-alert-icon128x128.png"
+  },
+  "homepage_url": "https://ncravino.github.io/weather-alert-monitor",
+  "data_collection_permissions": {
+    "collect_and_transmit": [],
+    "collect_in_website": [],
+    "collect_technical_and_interaction": [],
+    "data_collection_privacy_policy_url": "https://ncravino.github.io/weather-alert-monitor/privacy.html"
   }
 }
