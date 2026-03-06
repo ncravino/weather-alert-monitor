@@ -5,8 +5,11 @@
   "description": "Monitors Weather Alerts for any of the 33 European Countries part of EUMETNET MeteoAlarm.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "weather-alert-monitor@extension",
-      "strict_min_version": "91.0"
+      "id": "europe-weather-alert-monitor@ncravino",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "permissions": [
@@ -38,11 +41,5 @@
     "64": "icons/weather-alert-icon64x64.png",
     "128": "icons/weather-alert-icon128x128.png"
   },
-  "homepage_url": "https://ncravino.github.io/weather-alert-monitor",
-  "data_collection_permissions": {
-    "collect_and_transmit": [],
-    "collect_in_website": [],
-    "collect_technical_and_interaction": [],
-    "data_collection_privacy_policy_url": "https://ncravino.github.io/weather-alert-monitor/privacy.html"
-  }
+  "homepage_url": "https://ncravino.github.io/weather-alert-monitor"
 }
