@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Alert Monitor</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: #0ea5e9; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    nav {
+      background: #16213e;
+      border-bottom: 1px solid #0f3460;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    nav .logo { font-size: 22px; }
+    nav .site-name { font-size: 15px; font-weight: 700; color: #e2e8f0; }
+    nav .badge {
+      margin-left: auto;
+      font-size: 11px;
+      background: #0f3460;
+      color: #94a3b8;
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 64px 24px 48px;
+    }
+    .hero .icon { font-size: 64px; margin-bottom: 20px; }
+    .hero h1 { font-size: 32px; font-weight: 800; color: #e2e8f0; margin-bottom: 14px; }
+    .hero p {
+      font-size: 16px;
+      color: #94a3b8;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: 0.85; text-decoration: none; }
+    .btn-chrome { background: #0ea5e9; color: #fff; }
+    .btn-firefox { background: #f97316; color: #fff; }
+    .btn-source { background: #0f3460; color: #e2e8f0; border: 1px solid #1e3a5f; }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+    .feature {
+      background: #16213e;
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .feature .feat-icon { font-size: 28px; margin-bottom: 10px; }
+    .feature h3 { font-size: 14px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px; }
+    .feature p { font-size: 12px; color: #64748b; line-height: 1.55; }
+
+    /* Countries */
+    .countries-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      width: 100%;
+    }
+    .countries-section h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+    .country-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .country-tag {
+      background: #16213e;
+      border: 1px solid #1e3a5f;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      background: #16213e;
+      border-top: 1px solid #0f3460;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 11px;
+      color: #475569;
+    }
+    footer a { color: #64748b; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">🌪️</span>
+    <span class="site-name">Weather Alert Monitor</span>
+    <span class="badge">MeteoAlarm · 39 countries</span>
+  </nav>
+
+  <section class="hero">
+    <div class="icon">🌪️</div>
+    <h1>Weather alerts,<br>right in your browser</h1>
+    <p>
+      A free browser extension that polls <a href="https://www.meteoalarm.org/" target="_blank">MeteoAlarm</a>
+      every 15 minutes and sends you a notification whenever a new weather alert is issued for your country.
+      No account. No API key. 39 European countries covered.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-firefox" href="weather-alert-extension-firefox/" title="Load in Firefox">
+        &#9679; Install for Firefox
+      </a>
+      <a class="btn btn-source" href="https://github.com" target="_blank">
+        &#128196; Source code
+      </a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <div class="feat-icon">🔔</div>
+      <h3>Real-time notifications</h3>
+      <p>Get a browser notification the moment a new alert is issued. One notification per event — no spam.</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🌍</div>
+      <h3>39 European countries</h3>
+      <p>Powered by MeteoAlarm, the official European severe weather alert network operated by EUMETNET.</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">📍</div>
+      <h3>Auto-detect location</h3>
+      <p>Click Detect and the extension finds your country automatically using your browser's geolocation.</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🔒</div>
+      <h3>Private by design</h3>
+      <p>No data ever leaves your browser. Everything is stored locally. No account or API key required.</p>
+    </div>
+  </section>
+
+  <section class="countries-section">
+    <h2>Covered countries</h2>
+    <div class="country-tags">
+      <span class="country-tag">Austria</span>
+      <span class="country-tag">Belgium</span>
+      <span class="country-tag">Bosnia Herzegovina</span>
+      <span class="country-tag">Bulgaria</span>
+      <span class="country-tag">Croatia</span>
+      <span class="country-tag">Cyprus</span>
+      <span class="country-tag">Czech Republic</span>
+      <span class="country-tag">Denmark</span>
+      <span class="country-tag">Estonia</span>
+      <span class="country-tag">Finland</span>
+      <span class="country-tag">France</span>
+      <span class="country-tag">Germany</span>
+      <span class="country-tag">Greece</span>
+      <span class="country-tag">Hungary</span>
+      <span class="country-tag">Iceland</span>
+      <span class="country-tag">Ireland</span>
+      <span class="country-tag">Israel</span>
+      <span class="country-tag">Italy</span>
+      <span class="country-tag">Kosovo</span>
+      <span class="country-tag">Latvia</span>
+      <span class="country-tag">Lithuania</span>
+      <span class="country-tag">Luxembourg</span>
+      <span class="country-tag">Malta</span>
+      <span class="country-tag">Moldova</span>
+      <span class="country-tag">Montenegro</span>
+      <span class="country-tag">Netherlands</span>
+      <span class="country-tag">North Macedonia</span>
+      <span class="country-tag">Norway</span>
+      <span class="country-tag">Poland</span>
+      <span class="country-tag">Portugal</span>
+      <span class="country-tag">Romania</span>
+      <span class="country-tag">Serbia</span>
+      <span class="country-tag">Slovakia</span>
+      <span class="country-tag">Slovenia</span>
+      <span class="country-tag">Spain</span>
+      <span class="country-tag">Sweden</span>
+      <span class="country-tag">Switzerland</span>
+      <span class="country-tag">Turkey</span>
+      <span class="country-tag">United Kingdom</span>
+    </div>
+  </section>
+
+  <footer>
+    Data from <a href="https://www.meteoalarm.org/" target="_blank">MeteoAlarm</a> · EUMETNET ·
+    Location detection via <a href="https://nominatim.openstreetmap.org/" target="_blank">Nominatim</a> · OpenStreetMap ·
+    <a href="privacy.html">Privacy Policy</a>
+  </footer>
+
+</body>
+</html>
